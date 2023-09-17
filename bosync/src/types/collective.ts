@@ -8,6 +8,7 @@ export interface Event {
     repeatInterval: number;
     repeatIntervalCount: string;
     category: string;
+    _id?: string;
 }
 
 export interface Collective {

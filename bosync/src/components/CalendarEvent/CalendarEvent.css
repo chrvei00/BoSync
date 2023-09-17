@@ -6,6 +6,12 @@
     flex-direction: column;
     margin-bottom: 1rem;
     padding: 0.5rem;
+    cursor: pointer;
+}
+
+.calendar-event-container:hover {
+    transition: scale 0.5s ease-in-out;
+    scale: 1.05;
 }
 
 .calendar-event-title {

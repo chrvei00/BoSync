@@ -4,11 +4,13 @@ import './CalendarEvent.css';
 
 interface CalendarEventProps {
     event: Event;
+    handleEventClicked: () => void;
 }
 
-export const CalendarEvent = ({ event }: CalendarEventProps) => {
+export const CalendarEvent = ({ event, handleEventClicked }: CalendarEventProps) => {
     return (
         <div
+            onClick={handleEventClicked}
             className="calendar-event-container"
             style={{ backgroundColor: eventCategoryColorMap[event.category as EventColor] }}
         >
