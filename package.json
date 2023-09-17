@@ -13,5 +13,13 @@
   "license": "ISC",
   "engines": {
     "node": "18.13.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrvei00/BoSync.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chrvei00/BoSync/issues"
+  },
+  "homepage": "https://github.com/chrvei00/BoSync#readme"
 }
