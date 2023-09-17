@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { Collective } from '../../../types/collective';
 import { RootState } from '../../store';
 import {
     createCollectiveThunk,
     getAllCollectivesThunk,
     getCollectiveByIdThunk,
+    getCollectiveByNameThunk,
     updateCollectiveThunk
 } from './collectiveThunks';
 import { addEventThunk } from './eventThunks';
@@ -26,7 +27,11 @@ const initialDataState: CollectiveState = {
 export const collectiveSlice = createSlice({
     name: 'collective',
     initialState: initialDataState,
-    reducers: {},
+    reducers: {
+        addEvent: (state, action) => {
+            state.collective.event.push(action.payload);
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getCollectiveByIdThunk.fulfilled, (state, action) => {
@@ -45,11 +50,16 @@ export const collectiveSlice = createSlice({
             .addCase(updateCollectiveThunk.fulfilled, (state, action) => {
                 state.collective = action.payload;
             })
+            .addCase(getCollectiveByNameThunk.fulfilled, (state, action) => {
+                state.collective = action.payload;
+            })
             .addCase(addEventThunk.fulfilled, (state, action) => {
                 state.collective = action.payload;
             });
     }
 });
+
+export const { addEvent } = collectiveSlice.actions;
 
 export const collectiveReducer = collectiveSlice.reducer;
 
@@ -60,3 +70,13 @@ export const selectAllCollectives = (state: RootState) => state.collective.allCo
 export const selectCurrentEvents = (state: RootState) => state.collective.collective.event;
 
 export const selectCurrentMembers = (state: RootState) => state.collective.collective.members;
+
+export const selectEventsOnDate = (date: Date) =>
+    createSelector(selectCurrentEvents, (events) =>
+        events?.filter(
+            (event) =>
+                new Date(event.deadline).getFullYear() === date.getFullYear() &&
+                new Date(event.deadline).getMonth() === date.getMonth() &&
+                new Date(event.deadline).getDate() === date.getDate()
+        )
+    );

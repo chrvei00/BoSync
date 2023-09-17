@@ -6,8 +6,7 @@
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: var(--color-tertiary);
+    color: rgba(255, 255, 255);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -27,6 +26,7 @@
 }
 
 #root {
+    background-color: var(--color-tertiary) !important;
     display: flex;
     margin: 0 auto;
     text-align: center;

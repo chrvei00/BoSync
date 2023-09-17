@@ -5,6 +5,7 @@
     border: 1px solid rgb(146, 146, 146);
     color: var(--text-dark);
     position: relative;
+    width: 10rem;
 }
 
 .day-of-week {
@@ -35,6 +36,9 @@
     width: 2rem;
     height: 2rem;
     cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.1s linear;
 }
 
 .add-event-icon path {
@@ -47,4 +51,9 @@
 
 .add-event-icon:active path {
     fill: var(--color-secondary-dark);
+}
+
+.calendar-day-container:hover .add-event-icon {
+    visibility: visible !important;
+    opacity: 100%;
 }

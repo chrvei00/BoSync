@@ -23,6 +23,6 @@ export async function createCollective(collective: Collective) {
 }
 
 export async function updateCollective(collective: Collective) {
-    const response = await axios.put(`update/${collective.id}`, collective);
+    const response = await axios.post(`update/${collective._id}`, collective);
     return response.data;
 }

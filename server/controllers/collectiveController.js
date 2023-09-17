@@ -56,11 +56,9 @@ exports.updateCollective = async (req, res) => {
       req.params.id,
       req.body
     );
-    req.session.collective._id === collective._id
-      ? (req.session.collective = collective)
-      : null;
     res.json({ data: collective, status: "success" });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };
