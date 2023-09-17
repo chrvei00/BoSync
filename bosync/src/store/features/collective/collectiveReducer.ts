@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
+import { getCollective } from './collectiveThunks';
 
 interface CollectiveState {
     collective: string;
@@ -20,6 +21,16 @@ export const collectiveSlice = createSlice({
         setCollective: (state, action: PayloadAction<string>) => {
             state.collective = action.payload;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getCollective.fulfilled, (state, action) => {
+                state.collectiveLoading = false;
+                state.collective = action.payload;
+            })
+            .addCase(getCollective.pending, (state) => {
+                state.collectiveLoading = true;
+            });
     }
 });
 
