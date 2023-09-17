@@ -16,7 +16,7 @@ export async function getLogout() {
     return response.data;
 }
 
-export async function getRegister(username: string, password: string) {
-    const response = await axios.post('/register', { username, password });
+export async function getRegister(username: string, password: string, collective: string) {
+    const response = await axios.post('/register', { username, password, collective });
     return response.data;
 }

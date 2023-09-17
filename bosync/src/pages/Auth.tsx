@@ -1,13 +1,37 @@
-import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { getLogin, getRegister } from '../api/user';
+import { useNavigate } from 'react-router-dom';
 // const { login, register, checkAuth } = require("../util/api");
 
 function Auth() {
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    // const handleLogin = (e) => {};
+    const handleLogin = (e: React.FormEvent) => {
+        e.preventDefault();
+        getLogin(username, password).then((res) => {
+            if (res.message === 'Logget inn.') {
+                console.log('logged in');
+                setError('');
+                navigate('/');
+            } else {
+                setError('Feil brukernavn eller passord');
+            }
+        });
+    };
 
-    // const handleRegister = (e) => {};
+    const handleRegister = (e: React.FormEvent) => {
+        e.preventDefault();
+        getRegister(username, password, collective).then((res) => {
+            if (res.message === 'user created') {
+                console.log('registered');
+                navigate('/');
+                setError('');
+            } else {
+                setError('Feil brukernavn eller passord');
+            }
+        });
+    };
 
     const [authMode, setAuthMode] = useState(true);
     const [username, setUsername] = useState('');
@@ -41,7 +65,7 @@ function Auth() {
                         Registrer deg
                     </button>
                 </div>
-                <form onSubmit={(e) => e}>
+                <form onSubmit={(e) => handleLogin(e)}>
                     <div>
                         <div className="form-group mt-3">
                             <label>Navn</label>
@@ -101,7 +125,7 @@ function Auth() {
                         Logg inn
                     </button>
                 </div>
-                <form onSubmit={(e) => e}>
+                <form onSubmit={(e) => handleRegister(e)}>
                     <div>
                         <div className="form-group mt-3">
                             <label>Navn</label>
