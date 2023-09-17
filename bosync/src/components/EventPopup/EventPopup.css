@@ -1,0 +1,38 @@
+.event-popup-container {
+    position: fixed;
+    z-index: 100;
+    background-color: #000000a3;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.event-popup {
+    width: 90%;
+    height: 90%;
+    background-color: var(--color-primary-dark);
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.close-icon {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+}
+
+.close-icon:hover path {
+    fill: var(--color-secondary);
+}
+
+.close-icon:active path {
+    fill: var(--color-secondary-dark);
+}
