@@ -8,7 +8,7 @@ import {
     getCollectiveByNameThunk,
     updateCollectiveThunk
 } from './collectiveThunks';
-import { addEventThunk } from './eventThunks';
+import { addEventThunk, updateEventThunk } from './eventThunks';
 
 interface CollectiveState {
     collective: Collective;
@@ -51,6 +51,9 @@ export const collectiveSlice = createSlice({
                 state.collective = action.payload;
             })
             .addCase(getCollectiveByNameThunk.fulfilled, (state, action) => {
+                state.collective = action.payload;
+            })
+            .addCase(updateEventThunk.fulfilled, (state, action) => {
                 state.collective = action.payload;
             })
             .addCase(addEventThunk.fulfilled, (state, action) => {

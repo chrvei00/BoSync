@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ReactComponent as Plus } from '../../assets/plus-circle.svg';
 import { selectEventsOnDate } from '../../store/features/collective/collectiveReducer';
+import { Event } from '../../types/collective';
 import { CalendarEvent } from '../CalendarEvent/CalendarEvent';
 import { EventPopup } from '../EventPopup/EventPopup';
 import './CalendarDay.css';
@@ -27,6 +28,7 @@ const getFormattedDayString = (day: number) => {
 
 export const CalendarDay = ({ date }: CalendarDayProps) => {
     const [popupVisibility, setPopupVisibility] = useState(false);
+    const [currEvent, setCurrEvent] = useState<Event | null>(null);
 
     const events = useSelector(selectEventsOnDate(date));
 
@@ -36,11 +38,22 @@ export const CalendarDay = ({ date }: CalendarDayProps) => {
 
     const onCloseClick = () => {
         setPopupVisibility(false);
+        setCurrEvent(null);
+    };
+
+    const handleEventClicked = (event: Event) => () => {
+        setPopupVisibility(true);
+        setCurrEvent(event);
     };
 
     return (
         <div className="calendar-day-container">
-            <EventPopup onCloseClick={onCloseClick} visible={popupVisibility} date={date} />
+            <EventPopup
+                onCloseClick={onCloseClick}
+                visible={popupVisibility}
+                date={date}
+                event={currEvent}
+            />
             <Plus className="add-event-icon" onClick={onPlusClick} />
             <span className="day-of-week">{getFormattedDayString(date.getDay())}</span>
             <span className="date">{getDate(date)}</span>
@@ -48,7 +61,11 @@ export const CalendarDay = ({ date }: CalendarDayProps) => {
                 {events &&
                     events.length > 0 &&
                     events.map((event) => (
-                        <CalendarEvent event={event} key={crypto.randomUUID()} />
+                        <CalendarEvent
+                            event={event}
+                            key={crypto.randomUUID()}
+                            handleEventClicked={handleEventClicked(event)}
+                        />
                     ))}
             </div>
         </div>
