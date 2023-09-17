@@ -25,7 +25,7 @@
     flex-direction: column;
     flex-grow: 1;
     padding: 0.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.447);
+    border-top: 2px solid rgba(0, 0, 0, 0.447);
 }
 
 .add-event-icon {
@@ -38,7 +38,7 @@
 }
 
 .add-event-icon path {
-    fill: var(--color-tertiary);
+    fill: var(--color-primary-dark);
 }
 
 .add-event-icon:hover path {

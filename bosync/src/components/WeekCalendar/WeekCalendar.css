@@ -5,11 +5,43 @@
 }
 
 .week-calendar-days-container {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.8);
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    align-items: stretch;
-    justify-items: stretch;
     overflow: hidden;
     border-radius: 1rem;
     height: 100%;
+}
+
+.week-calendar-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+}
+
+.week-calendar-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    height: 100%;
+}
+
+.week-calendar-arrow {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.week-calendar-arrow path {
+    fill: var(--color-secondary);
+}
+
+.week-calendar-arrow:hover path {
+    fill: var(--color-secondary-dark);
+}
+
+.week-calendar-arrow:active path {
+    fill: var(--color-secondary-darker);
 }
