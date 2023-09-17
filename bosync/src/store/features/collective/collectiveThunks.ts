@@ -1,15 +1,42 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+    createCollective,
+    getAllCollectives,
+    getCollectiveById,
+    updateCollective
+} from '../../../api/collective';
+import { Collective } from '../../../types/collective';
 
-const mockApiCall = async (collective: string) => {
-    return {
-        data: collective
-    };
-};
-
-export const getCollective = createAsyncThunk<string, string, Record<string, never>>(
+export const getCollectiveByIdThunk = createAsyncThunk<Collective, string, Record<string, never>>(
     'collective/getCollective',
-    async (collective: string) => {
-        const { data } = await mockApiCall(collective);
-        return data;
+    async (collectiveId: string) => {
+        const collective = await getCollectiveById(collectiveId);
+        return collective as Collective;
     }
 );
+
+export const getAllCollectivesThunk = createAsyncThunk<Collective[], void, Record<string, never>>(
+    'collective/getAllCollectives',
+    async () => {
+        const collectives = await getAllCollectives();
+        return collectives as Collective[];
+    }
+);
+
+export const createCollectiveThunk = createAsyncThunk<
+    Collective,
+    Collective,
+    Record<string, never>
+>('collective/createCollective', async (collective: Collective) => {
+    const createdCollective = await createCollective(collective);
+    return createdCollective as Collective;
+});
+
+export const updateCollectiveThunk = createAsyncThunk<
+    Collective,
+    Collective,
+    Record<string, never>
+>('collective/updateCollective', async (collective: Collective) => {
+    const createdCollective = await updateCollective(collective);
+    return createdCollective as Collective;
+});
