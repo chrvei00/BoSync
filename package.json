@@ -1,0 +1,17 @@
+{
+  "name": "bosync",
+  "version": "1.0.0",
+  "description": "Lev enklere",
+  "main": "./server/server.js",
+  "scripts": {
+    "build-server": "cd server && npm install",
+    "start-server": "cd server && npm start",
+    "build-client": "cd bosync && npm install",
+    "start-client": "cd bosync && npm start"
+  },
+  "author": "Thor Sjursen & Christian Veiby",
+  "license": "ISC",
+  "engines": {
+    "node": "18.13.0"
+  }
+}
