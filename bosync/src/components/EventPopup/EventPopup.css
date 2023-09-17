@@ -18,6 +18,19 @@
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-form-container {
+    width: 50%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    justify-content: center;
 }
 
 .close-icon {

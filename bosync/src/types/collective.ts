@@ -11,7 +11,7 @@ export interface Event {
 }
 
 export interface Collective {
-    id: string;
+    _id: string;
     date: Date;
     name: string;
     members: string[];

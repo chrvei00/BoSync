@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Root } from './components/Root/Root.tsx';
-import { WeekCalendar } from './components/WeekCalendar/WeekCalendar.tsx';
 import './index.css';
+import { CalendarPage } from './pages/CalendarPage/CalendarPage.tsx';
 import { store } from './store/store.ts';
 import Auth from './pages/Auth.tsx';
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/calendar',
-                element: <WeekCalendar dateStart={new Date()} />
+                element: <CalendarPage />
             }
         ]
     },

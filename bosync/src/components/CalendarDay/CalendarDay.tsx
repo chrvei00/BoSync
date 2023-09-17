@@ -1,7 +1,8 @@
 import { getDate } from 'date-fns';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ReactComponent as Plus } from '../../assets/plus-circle.svg';
-import { mockEvents } from '../../util/mock';
+import { selectEventsOnDate } from '../../store/features/collective/collectiveReducer';
 import { CalendarEvent } from '../CalendarEvent/CalendarEvent';
 import { EventPopup } from '../EventPopup/EventPopup';
 import './CalendarDay.css';
@@ -27,6 +28,8 @@ const getFormattedDayString = (day: number) => {
 export const CalendarDay = ({ date }: CalendarDayProps) => {
     const [popupVisibility, setPopupVisibility] = useState(false);
 
+    const events = useSelector(selectEventsOnDate(date));
+
     const onPlusClick = () => {
         setPopupVisibility(true);
     };
@@ -35,18 +38,18 @@ export const CalendarDay = ({ date }: CalendarDayProps) => {
         setPopupVisibility(false);
     };
 
-    const events = mockEvents.filter((e) => e.date.getDay() === date.getDay());
-
     return (
         <div className="calendar-day-container">
-            <EventPopup onCloseClick={onCloseClick} visible={popupVisibility} />
+            <EventPopup onCloseClick={onCloseClick} visible={popupVisibility} date={date} />
             <Plus className="add-event-icon" onClick={onPlusClick} />
             <span className="day-of-week">{getFormattedDayString(date.getDay())}</span>
             <span className="date">{getDate(date)}</span>
             <div className="calendar-day-events">
-                {events.map((event) => (
-                    <CalendarEvent event={event} key={event.id} />
-                ))}
+                {events &&
+                    events.length > 0 &&
+                    events.map((event) => (
+                        <CalendarEvent event={event} key={crypto.randomUUID()} />
+                    ))}
             </div>
         </div>
     );
