@@ -1,9 +1,7 @@
 import { addDays, eachDayOfInterval } from 'date-fns';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ReactComponent as ArrowLeft } from '../../assets/arrow-left-circle-fill.svg';
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right-circle-fill.svg';
-import { useAppDispatch } from '../../hooks/redux';
-import { getCollectiveByNameThunk } from '../../store/features/collective/collectiveThunks';
 import { localeFormat } from '../../util/dates';
 import { CalendarDay } from '../CalendarDay/CalendarDay';
 import './WeekCalendar.css';
@@ -18,11 +16,6 @@ export const WeekCalendar = ({ dateStart }: WeekCalendarProps) => {
     const [currDateEnd, setCurrDateEnd] = useState<Date>(dateEnd);
 
     const dates = eachDayOfInterval({ start: currDateStart, end: currDateEnd });
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(getCollectiveByNameThunk('test'));
-    }, [dispatch]);
 
     const clickLeft = () => {
         setCurrDateStart(addDays(currDateStart, -7));

@@ -143,11 +143,12 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
                                 onChange={getSelectFieldHandler('assigned')}
                                 value={formValues.assigned}
                             >
-                                {collective.members.map((member) => (
-                                    <option key={member} value={member}>
-                                        {member}
-                                    </option>
-                                ))}
+                                {collective.members &&
+                                    collective.members.map((member) => (
+                                        <option key={member} value={member}>
+                                            {member}
+                                        </option>
+                                    ))}
                             </select>
                         </div>
                         <div className="form-group">

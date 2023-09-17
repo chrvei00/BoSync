@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Root } from './components/Root/Root.tsx';
 import './index.css';
-import { CalendarPage } from './pages/CalendarPage/CalendarPage.tsx';
-import { store } from './store/store.ts';
 import Auth from './pages/Auth.tsx';
+import { CalendarPage } from './pages/CalendarPage/CalendarPage.tsx';
+import { Landing } from './pages/Landing.tsx';
+import { store } from './store/store.ts';
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: '/calendar',
                 element: <CalendarPage />
+            },
+            {
+                path: '/',
+                element: <Landing />
             }
         ]
     },

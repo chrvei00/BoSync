@@ -1,23 +1,37 @@
 import { useState } from 'react';
-import { getLogin, getRegister } from '../api/user';
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { getLogin, getRegister } from '../api/user';
+import { useAppDispatch } from '../hooks/redux';
+import { getCollectiveByIdThunk } from '../store/features/collective/collectiveThunks';
 // const { login, register, checkAuth } = require("../util/api");
 
 function Auth() {
     const [error, setError] = useState('');
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        getLogin(username, password).then((res) => {
-            if (res.message === 'Logget inn.') {
-                console.log('logged in');
-                setError('');
-                navigate('/');
-            } else {
+        getLogin(username, password)
+            .then((res) => {
+                if (res.message === 'Logget inn.') {
+                    console.log('logged in');
+                    setError('');
+                    dispatch(getCollectiveByIdThunk(res.data.collective))
+                        .unwrap()
+                        .then(() => {
+                            navigate('/');
+                        });
+                } else {
+                    setError('Feil brukernavn eller passord');
+                    toast.error('Feil brukernavn eller passord');
+                }
+            })
+            .catch(() => {
                 setError('Feil brukernavn eller passord');
-            }
-        });
+                toast.error('Feil brukernavn eller passord');
+            });
     };
 
     const handleRegister = (e: React.FormEvent) => {
@@ -101,6 +115,7 @@ function Auth() {
                         </div>
                     </div>
                 </form>
+                <Toaster />
             </div>
         );
     } else {
@@ -174,6 +189,7 @@ function Auth() {
                         </div>
                     </div>
                 </form>
+                <Toaster />
             </div>
         );
     }
