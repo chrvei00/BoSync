@@ -7,7 +7,7 @@
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: var(--color-tertiary);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -16,10 +16,12 @@
     -webkit-text-size-adjust: 100%;
 
     --color-primary: #e7ecef;
+    --color-primary: #e7ecef;
     --color-primary-dark: rgb(144, 148, 151);
     --color-secondary: #fcca46;
     --color-secondary-dark: #c59f36;
-    --color-tertiary: #5f6062;
+    --color-secondary-darker: #816723;
+    --color-tertiary: #363531;
     --text-light: #ffffff;
     --text-dark: #333333;
 }
@@ -27,10 +29,10 @@
 #root {
     display: flex;
     margin: 0 auto;
-    padding: 2rem;
     text-align: center;
     align-items: stretch;
     justify-items: stretch;
+    flex-direction: column;
     width: 100%;
 }
 

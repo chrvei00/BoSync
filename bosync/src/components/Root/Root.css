@@ -1,0 +1,6 @@
+.outlet-container {
+    padding: 2rem 2rem;
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+}
