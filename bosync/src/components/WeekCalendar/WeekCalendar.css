@@ -1,0 +1,15 @@
+.week-calendar-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.week-calendar-days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: stretch;
+    justify-items: stretch;
+    overflow: hidden;
+    border-radius: 1rem;
+    height: 100%;
+}

@@ -1,0 +1,14 @@
+.calendar-event-container {
+    background-color: var(--color-primary-dark);
+    border-radius: 0.5rem;
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.calendar-event-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}

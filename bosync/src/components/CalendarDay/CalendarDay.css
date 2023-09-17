@@ -1,0 +1,50 @@
+.calendar-day-container {
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(146, 146, 146);
+    color: var(--text-dark);
+    position: relative;
+}
+
+.day-of-week {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    line-height: 110%;
+    color: #626262;
+}
+
+.date {
+    line-height: 110%;
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+}
+
+.calendar-day-events {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.447);
+}
+
+.add-event-icon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.add-event-icon path {
+    fill: var(--color-tertiary);
+}
+
+.add-event-icon:hover path {
+    fill: var(--color-secondary);
+}
+
+.add-event-icon:active path {
+    fill: var(--color-secondary-dark);
+}
