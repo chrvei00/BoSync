@@ -6,6 +6,7 @@ import { Root } from './components/Root/Root.tsx';
 import { WeekCalendar } from './components/WeekCalendar/WeekCalendar.tsx';
 import './index.css';
 import { store } from './store/store.ts';
+import Auth from './pages/Auth.tsx';
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
                 element: <WeekCalendar dateStart={new Date()} />
             }
         ]
+    },
+    {
+        path: '/auth',
+        element: <Auth />
     }
 ]);
 
