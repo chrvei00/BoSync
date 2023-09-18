@@ -1,5 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { Collective } from '../../../types/collective';
+import { User } from '../../../types/user';
+import { isIntervalModulo } from '../../../util/repeatingDate';
 import { RootState } from '../../store';
 import {
     createCollectiveThunk,
@@ -15,13 +17,15 @@ interface CollectiveState {
     allCollectives: Collective[];
     collectiveError: string;
     collectiveLoading: boolean;
+    currUser: User;
 }
 
 const initialDataState: CollectiveState = {
     collective: {} as Collective,
     allCollectives: [],
     collectiveError: '',
-    collectiveLoading: false
+    collectiveLoading: false,
+    currUser: {} as User
 };
 
 export const collectiveSlice = createSlice({
@@ -30,6 +34,9 @@ export const collectiveSlice = createSlice({
     reducers: {
         addEvent: (state, action) => {
             state.collective.event.push(action.payload);
+        },
+        setUser: (state, action) => {
+            state.currUser = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -62,7 +69,7 @@ export const collectiveSlice = createSlice({
     }
 });
 
-export const { addEvent } = collectiveSlice.actions;
+export const { addEvent, setUser } = collectiveSlice.actions;
 
 export const collectiveReducer = collectiveSlice.reducer;
 
@@ -74,12 +81,15 @@ export const selectCurrentEvents = (state: RootState) => state.collective.collec
 
 export const selectCurrentMembers = (state: RootState) => state.collective.collective.members;
 
+export const selectUser = (state: RootState) => state.collective.currUser;
+
 export const selectEventsOnDate = (date: Date) =>
     createSelector(selectCurrentEvents, (events) =>
         events?.filter(
             (event) =>
-                new Date(event.deadline).getFullYear() === date.getFullYear() &&
-                new Date(event.deadline).getMonth() === date.getMonth() &&
-                new Date(event.deadline).getDate() === date.getDate()
+                (new Date(event.deadline).getFullYear() === date.getFullYear() &&
+                    new Date(event.deadline).getMonth() === date.getMonth() &&
+                    new Date(event.deadline).getDate() === date.getDate()) ||
+                isIntervalModulo(new Date(event.deadline), date, event.repeatInterval)
         )
     );

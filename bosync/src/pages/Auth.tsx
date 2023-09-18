@@ -3,6 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { getLogin, getRegister } from '../api/user';
 import { useAppDispatch } from '../hooks/redux';
+import { setUser } from '../store/features/collective/collectiveReducer';
 import { getCollectiveByIdThunk } from '../store/features/collective/collectiveThunks';
 // const { login, register, checkAuth } = require("../util/api");
 
@@ -18,6 +19,7 @@ function Auth() {
                 if (res.message === 'Logget inn.') {
                     console.log('logged in');
                     setError('');
+                    dispatch(setUser(res.data));
                     dispatch(getCollectiveByIdThunk(res.data.collective))
                         .unwrap()
                         .then(() => {

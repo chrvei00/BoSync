@@ -1,7 +1,7 @@
 export interface Event {
     name: string;
     description: string;
-    deadline: Date;
+    deadline: string;
     completed: boolean;
     assigned: string;
     isRepeating: boolean;

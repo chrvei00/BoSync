@@ -7,6 +7,7 @@ import { selectCollective } from '../../store/features/collective/collectiveRedu
 import { addEventThunk, updateEventThunk } from '../../store/features/collective/eventThunks';
 import { Event } from '../../types/collective';
 import { EventColors, eventCategoryColorTranslator } from '../../util/color';
+import { SetInterval, repeatingIntervalTranslator } from '../../util/repeatingDate';
 import './EventPopup.css';
 
 interface EventPopupProps {
@@ -94,7 +95,7 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
         e.preventDefault();
         const newEvent: Event = {
             ...formValues,
-            deadline: date,
+            deadline: event?.deadline || date.toUTCString(),
             completed: event?.completed || false,
             _id: event?._id
         };
@@ -163,6 +164,29 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
                                         {eventCategoryColorTranslator[color]}
                                     </option>
                                 ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Gjenta:</label>
+                            <select
+                                className="form-select"
+                                onChange={getSelectFieldHandler('repeatInterval')}
+                                value={formValues.repeatInterval}
+                            >
+                                {Object.values(SetInterval)
+                                    .filter((v) => isNaN(Number(v)) === false)
+                                    .map(
+                                        (interval) =>
+                                            interval && (
+                                                <option key={interval} value={interval}>
+                                                    {
+                                                        repeatingIntervalTranslator[
+                                                            interval as SetInterval
+                                                        ]
+                                                    }
+                                                </option>
+                                            )
+                                    )}
                             </select>
                         </div>
                         <button className="btn btn-primary" type="submit">
