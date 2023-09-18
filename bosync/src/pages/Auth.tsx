@@ -5,6 +5,7 @@ import { getLogin, getRegister } from '../api/user';
 import { useAppDispatch } from '../hooks/redux';
 import { setUser } from '../store/features/collective/collectiveReducer';
 import { getCollectiveByIdThunk } from '../store/features/collective/collectiveThunks';
+import { saveUser } from '../util/session';
 // const { login, register, checkAuth } = require("../util/api");
 
 function Auth() {
@@ -23,6 +24,7 @@ function Auth() {
                     dispatch(getCollectiveByIdThunk(res.data.collective))
                         .unwrap()
                         .then(() => {
+                            saveUser(res.data);
                             navigate('/');
                         });
                 } else {

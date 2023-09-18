@@ -10,6 +10,11 @@ interface WeekCalendarProps {
     dateStart: Date;
 }
 
+const cantJumpLeft = (date: Date) => {
+    const now = new Date();
+    return addDays(date, -2) <= now;
+};
+
 export const WeekCalendar = ({ dateStart }: WeekCalendarProps) => {
     const dateEnd = addDays(dateStart, 6);
     const [currDateStart, setCurrDateStart] = useState<Date>(dateStart); // TODO: [2021-10-06]: Use this to update the calendar when the user clicks the arrows [2021-10-06
@@ -18,6 +23,7 @@ export const WeekCalendar = ({ dateStart }: WeekCalendarProps) => {
     const dates = eachDayOfInterval({ start: currDateStart, end: currDateEnd });
 
     const clickLeft = () => {
+        if (cantJumpLeft(currDateStart)) return;
         setCurrDateStart(addDays(currDateStart, -7));
         setCurrDateEnd(addDays(currDateEnd, -7));
     };

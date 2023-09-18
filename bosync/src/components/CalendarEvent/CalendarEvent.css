@@ -7,6 +7,7 @@
     margin-bottom: 1rem;
     padding: 0.5rem;
     cursor: pointer;
+    position: relative;
 }
 
 .calendar-event-container:hover {
@@ -15,6 +16,31 @@
 }
 
 .calendar-event-title {
+    margin-top: 0.5rem;
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+.calendar-event-check {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    visibility: hidden;
+    filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.8));
+}
+
+.calendar-event-container:hover .calendar-event-check path,
+.calendar-event-check.completed {
+    visibility: visible;
+}
+
+.calendar-event-check:hover path {
+    fill: rgb(23, 148, 27);
+}
+
+.calendar-event-check:active path {
+    fill: rgb(15, 97, 18);
 }

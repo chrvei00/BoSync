@@ -4,13 +4,15 @@ import { NavBar } from '../NavBar/NavBar';
 import './Root.css';
 
 export const Root = () => {
-    useAuth();
+    const show = useAuth();
     return (
-        <>
-            <NavBar />
-            <div className="outlet-container">
-                <Outlet />
-            </div>
-        </>
+        show && (
+            <>
+                <NavBar />
+                <div className="outlet-container">
+                    <Outlet />
+                </div>
+            </>
+        )
     );
 };

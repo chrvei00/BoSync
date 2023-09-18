@@ -24,9 +24,6 @@ export const NavBar = () => {
 
     return (
         <nav className="nav-bar-container">
-            {/* <div className="logo-container">
-                <h2 className="logo">Movie Suggestor</h2>
-            </div> */}
             <ul className="nav-bar-elements">
                 {links.map((link) => (
                     <NavLink

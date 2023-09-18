@@ -50,7 +50,7 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
     const formDefaultValues = {
         name: '',
         description: '',
-        assigned: '',
+        assigned: collective?.members[0] || '',
         isRepeating: false,
         repeatInterval: 0,
         repeatIntervalCount: '',
@@ -92,6 +92,7 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        console.log(formValues);
         e.preventDefault();
         const newEvent: Event = {
             ...formValues,
@@ -142,7 +143,8 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
                             <select
                                 className="form-control"
                                 onChange={getSelectFieldHandler('assigned')}
-                                value={formValues.assigned}
+                                value={collective.members[0]}
+                                defaultValue={collective.members[0]}
                             >
                                 {collective.members &&
                                     collective.members.map((member) => (
