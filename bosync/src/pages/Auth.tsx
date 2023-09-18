@@ -43,6 +43,13 @@ function Auth() {
         getRegister(username, password, collective).then((res) => {
             if (res.message === 'user created') {
                 console.log('registered');
+                dispatch(setUser(res.data));
+                dispatch(getCollectiveByIdThunk(res.data.collective))
+                    .unwrap()
+                    .then(() => {
+                        saveUser(res.data);
+                        navigate('/');
+                    });
                 navigate('/');
                 setError('');
             } else {
