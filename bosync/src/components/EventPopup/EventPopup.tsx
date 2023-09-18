@@ -143,8 +143,6 @@ export const EventPopup = ({ onCloseClick, visible, date, event }: EventPopupPro
                             <select
                                 className="form-control"
                                 onChange={getSelectFieldHandler('assigned')}
-                                value={collective.members[0]}
-                                defaultValue={collective.members[0]}
                             >
                                 {collective.members &&
                                     collective.members.map((member) => (
